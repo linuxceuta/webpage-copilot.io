@@ -1,0 +1,13 @@
+// filepath: /home/tor/Descargas/cs13net9/cursoMicrosoft/TasksApp/Components/EventCard.razor
+@code {
+    [Parameter, EditorRequired]
+    public Event EventDetails { get; set; } = default!;
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@EventDetails.Name</h5>
+        <p class="card-text">Date: @EventDetails.Date.ToShortDateString()</p>
+        <p class="card-text">Location: @EventDetails.Location</p>
+    </div>
+</div>
