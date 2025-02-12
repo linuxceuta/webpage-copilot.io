@@ -1,0 +1,28 @@
+// filepath: /home/tor/Descargas/cs13net9/cursoMicrosoft/TasksApp/Pages/Events.razor
+@page "/events"
+@inject NavigationManager Navigation
+
+<h3>Events</h3>
+
+@foreach (var eventDetail in events)
+{
+    <div>
+        <EventCard EventDetails="eventDetail" />
+        <button class="btn btn-secondary" @onclick="() => NavigateToEventDetails(eventDetail)">View Details</button>
+    </div>
+}
+
+@code {
+    private List<Event> events = new List<Event>
+    {
+        new Event { Name = "Event 1", Date = DateTime.Now, Location = "Location 1" },
+        new Event { Name = "Event 2", Date = DateTime.Now.AddDays(1), Location = "Location 2" },
+        new Event { Name = "Event 3", Date = DateTime.Now.AddDays(2), Location = "Location 3" }
+    };
+
+    private void NavigateToEventDetails(Event eventDetail)
+    {
+        var eventId = events.IndexOf(eventDetail) + 1;
+        Navigation.NavigateTo($"/events/{eventId}");
+    }
+}

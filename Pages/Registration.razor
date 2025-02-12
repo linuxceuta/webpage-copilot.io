@@ -1,0 +1,40 @@
+// filepath: /home/tor/Descargas/cs13net9/cursoMicrosoft/TasksApp/Pages/Registration.razor
+@page "/registration"
+@inject UserSession UserSession
+
+<EditForm Model="@user" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="username">Username:</label>
+        <InputText id="username" @bind-Value="user.Username" />
+        <ValidationMessage For="@(() => user.Username)" />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <InputText id="password" type="password" @bind-Value="user.Password" />
+        <ValidationMessage For="@(() => user.Password)" />
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <InputText id="email" @bind-Value="user.Email" />
+        <ValidationMessage For="@(() => user.Email)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</EditForm>
+
+@code {
+    private User user = new User
+    {
+        Username = string.Empty,
+        Password = string.Empty,
+        Email = string.Empty
+    };
+
+    private void HandleValidSubmit()
+    {
+        UserSession.Login(user);
+        // Redirect to another page or show a success message
+    }
+}

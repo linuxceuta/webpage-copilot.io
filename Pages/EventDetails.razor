@@ -1,0 +1,28 @@
+// filepath: /home/tor/Descargas/cs13net9/cursoMicrosoft/TasksApp/Pages/EventDetails.razor
+@page "/events/{eventId:int}"
+@inject NavigationManager Navigation
+
+@code {
+    [Parameter]
+    public int EventId { get; set; }
+
+    private Event? eventDetail;
+
+    protected override void OnInitialized()
+    {
+        // Fetch event details based on EventId
+        eventDetail = new Event { Name = "Event " + EventId, Date = DateTime.Now.AddDays(EventId), Location = "Location " + EventId };
+    }
+}
+
+<h3>@eventDetail?.Name</h3>
+<p>Date: @eventDetail?.Date.ToShortDateString()</p>
+<p>Location: @eventDetail?.Location</p>
+<button class="btn btn-secondary" @onclick="NavigateBackToEvents">Back to Events</button>
+
+@code {
+    private void NavigateBackToEvents()
+    {
+        Navigation.NavigateTo("/events");
+    }
+}
